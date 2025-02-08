@@ -1,11 +1,11 @@
 let searchBox = document.querySelector("#search-box");
 let images = document.querySelectorAll(".container .container-image .image");
-let warningMessage = document.createElement("div");  
+let warningMessage = document.createElement("div");
 
-warningMessage.style.color = "red";  
-warningMessage.style.fontSize = "20px";  
-warningMessage.style.fontWeight = "bold";  
-warningMessage.style.marginTop = "10px";  
+warningMessage.style.color = "red";
+warningMessage.style.fontSize = "20px";
+warningMessage.style.fontWeight = "bold";
+warningMessage.style.marginTop = "10px";
 
 searchBox.parentNode.insertBefore(warningMessage, searchBox);
 
@@ -23,19 +23,20 @@ searchBox.addEventListener("keydown", function (event) {
 searchButton.addEventListener("click", filterImages);
 
 function filterImages() {
-    let value = searchBox.value.toLowerCase().trim(); 
+    let value = searchBox.value.toLowerCase().trim();
     let found = false;
 
     warningMessage.textContent = '';
 
     if (value.length < 2) {
-        warningMessage.textContent = "Digite pelo menos 2 caracteres para a busca";  
-        return; 
+        warningMessage.textContent = "Digite pelo menos 2 caracteres para a busca";
+        return;
     }
 
     images.forEach(image => {
-        let title = image.getAttribute("data-title").toLowerCase(); 
-        
+        let title = image.getAttribute("data-title").toLowerCase();
+        image.style.display = "none";
+
         if (title.includes(value)) {
             image.style.display = "block";
             found = true;
@@ -43,6 +44,6 @@ function filterImages() {
     });
 
     if (!found) {
-        warningMessage.textContent = "Resultado não encontrado";  
+        warningMessage.textContent = "Resultado não encontrado";
     }
 }
