@@ -1,49 +1,53 @@
-let searchBox = document.querySelector("#search-box");
-let images = document.querySelectorAll(".container .container-image .image");
-let warningMessage = document.createElement("div");
 
-warningMessage.style.color = "red";
-warningMessage.style.fontSize = "20px";
-warningMessage.style.fontWeight = "bold";
-warningMessage.style.marginTop = "10px";
+document.addEventListener("DOMContentLoaded", function () {
+    let searchBox = document.querySelector("#search-box");
+    let images = document.querySelectorAll(".container .container-image .image");
+    let warningMessage = document.createElement("div");
 
-searchBox.parentNode.insertBefore(warningMessage, searchBox);
+    warningMessage.style.color = "red";
+    warningMessage.style.fontSize = "20px";
+    warningMessage.style.fontWeight = "bold";
+    warningMessage.style.marginTop = "10px";
 
-let searchButton = document.createElement("button");
-searchButton.textContent = "Buscar";
-searchButton.style.marginLeft = "10px";
-searchButton.style.padding = "5px 10px";
-searchBox.parentNode.insertBefore(searchButton, searchBox.nextSibling);
+    searchBox.parentNode.insertBefore(warningMessage, searchBox);
 
-searchBox.addEventListener("keydown", function (event) {
-    if (event.key === "Enter") {
-        filterImages();
-    }
-});
-searchButton.addEventListener("click", filterImages);
+    let searchButton = document.createElement("button");
+    searchButton.textContent = "Buscar";
+    searchButton.style.marginLeft = "10px";
+    searchButton.style.padding = "5px 10px";
+    searchBox.parentNode.insertBefore(searchButton, searchBox.nextSibling);
 
-function filterImages() {
-    let value = searchBox.value.toLowerCase().trim();
-    let found = false;
-
-    warningMessage.textContent = '';
-
-    if (value.length < 2) {
-        warningMessage.textContent = "Digite pelo menos 2 caracteres para a busca";
-        return;
-    }
-
-    images.forEach(image => {
-        let title = image.getAttribute("data-title").toLowerCase();
-        image.style.display = "none";
-
-        if (title.includes(value)) {
-            image.style.display = "block";
-            found = true;
+    searchBox.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+            filterImages();
         }
     });
 
-    if (!found) {
-        warningMessage.textContent = "Resultado não encontrado";
+    searchButton.addEventListener("click", filterImages);
+
+    function filterImages() {
+        let value = searchBox.value.toLowerCase().trim();
+        let found = false;
+
+        warningMessage.textContent = '';
+
+        if (value.length < 2) {
+            warningMessage.textContent = "Digite pelo menos 2 caracteres para a busca";
+            return;
+        }
+
+        images.forEach(image => {
+            let title = image.getAttribute("data-title")?.toLowerCase() || "";
+            image.style.display = "none";
+
+            if (title.includes(value)) {
+                image.style.display = "block";
+                found = true;
+            }
+        });
+
+        if (!found) {
+            warningMessage.textContent = "Resultado não encontrado";
+        }
     }
-}
+});
