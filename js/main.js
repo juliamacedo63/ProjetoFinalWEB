@@ -1,12 +1,12 @@
 let searchBox = document.querySelector("#search-box");
 let images = document.querySelectorAll(".container .container-image .image");
-let warningMessage = document.createElement("div"); // Novo elemento para a mensagem de aviso
+let warningMessage = document.createElement("div"); 
 
 // Personalizando o estilo da mensagem de aviso
 warningMessage.style.color = "red";  
-warningMessage.style.fontSize = "20px";  // Aumentando o tamanho da fonte
-warningMessage.style.fontWeight = "bold";  // Tornando o texto em negrito
-warningMessage.style.marginTop = "10px";  // Adicionando margem superior
+warningMessage.style.fontSize = "20px";  
+warningMessage.style.fontWeight = "bold";  
+warningMessage.style.marginTop = "10px";  
 
 // Adicionando a mensagem ao DOM, logo acima da caixa de pesquisa
 searchBox.parentNode.insertBefore(warningMessage, searchBox);
@@ -25,7 +25,7 @@ function filterImages() {
     warningMessage.textContent = '';
 
     if (value.length < 2) {
-        warningMessage.textContent = "Digite pelo menos 2 caracteres para a busca";  // Mensagem personalizada
+        warningMessage.textContent = "Digite pelo menos 2 caracteres para a busca";  
         searchBox.value = ''; 
         return; 
     }
@@ -37,11 +37,11 @@ function filterImages() {
             image.style.display = "block";
             found = true;
         } else {
-            image.style.display = "block"; // Continua mostrando todas as imagens, mas com a mensagem de erro se não encontrar nada
+            image.style.display = "block"; 
         }
     });
 
     if (!found) {
-        warningMessage.textContent = "Resultado não encontrado";  // Mensagem personalizada
+        warningMessage.textContent = "Resultado não encontrado";  
     }
 }
