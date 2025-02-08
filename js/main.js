@@ -1,25 +1,29 @@
-let searchBox = document.querySelector("#search-box");
-let images = document.querySelectorAll(".container .container-image .image");
-let warningMessage = document.createElement("div");
+let searchContainer = document.createElement("div");
+searchContainer.style.display = "flex";
+searchContainer.style.alignItems = "center";
+searchContainer.style.gap = "10px";
 
+let searchBox = document.querySelector("#search-box");
+searchBox.style.flex = "1";
+
+let searchButton = document.createElement("button");
+searchButton.textContent = "Buscar";
+searchButton.style.padding = "5px 10px";
+searchButton.style.cursor = "pointer";
+
+searchBox.parentNode.insertBefore(searchContainer, searchBox);
+searchContainer.appendChild(searchBox);
+searchContainer.appendChild(searchButton);
+
+let warningMessage = document.createElement("div");
 warningMessage.style.color = "red";
 warningMessage.style.fontSize = "20px";
 warningMessage.style.fontWeight = "bold";
 warningMessage.style.marginTop = "10px";
+searchContainer.parentNode.insertBefore(warningMessage, searchContainer.nextSibling);
 
-searchBox.parentNode.insertBefore(warningMessage, searchBox);
+let images = document.querySelectorAll(".container .container-image .image");
 
-let searchButton = document.createElement("button");
-searchButton.textContent = "Buscar";
-searchButton.style.marginLeft = "10px";
-searchButton.style.padding = "5px 10px";
-searchBox.parentNode.insertBefore(searchButton, searchBox.nextSibling);
-
-searchBox.addEventListener("keyup", function (event) {
-    if (event.key === "Enter") {
-        filterImages();
-    }
-});
 searchButton.addEventListener("click", filterImages);
 
 function filterImages() {
